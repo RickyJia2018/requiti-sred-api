@@ -21,4 +21,4 @@ exports.connect_options  = {
 
 exports.jwt_expiry_seconds = 2592000 // 30 days
 
-exports.salt_rounds=10;
+exports.saltRounds=10;

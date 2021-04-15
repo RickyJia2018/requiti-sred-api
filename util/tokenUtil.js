@@ -10,8 +10,10 @@ const privateKey = fs.readFileSync(path.resolve(__dirname, '../config/jwtRS256.k
 const cert = fs.readFileSync(path.resolve(__dirname, '../config/jwtRS256.key.pub'));
 
 const httpExceptions = require('../exceptions/HttpExceptions');
-exports.generateToken = function (userId) {
-    return jwt.sign({user_id: userId}, privateKey, {algorithm: 'RS256', expiresIn: jwtExpirySeconds});
+exports.generateToken = function (user) {
+    let temp = user.toJSON();
+    delete temp.password;
+    return jwt.sign(temp, privateKey, {algorithm: 'RS256', expiresIn: jwtExpirySeconds});
 } 
 
 exports.analysisToken = async (req, res, next) => {
