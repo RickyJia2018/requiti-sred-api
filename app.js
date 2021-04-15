@@ -7,14 +7,14 @@ const mongoose = require('mongoose');
 
 const app = express();
 dotenv.config();
-app.set('view engine', 'ejs');
+// app.set('view engine', 'ejs');
 
 app.use(express.urlencoded({ extended: false }));
-console.log(process.env.MONGO_URL);
-console.log(process.env.NODE_ENV);
+
 // Connect to MongoDB
 const connectDB = async () => {
-  const conn = await mongoose.connect(process.env.MONGO_URL,{ useNewUrlParser: true, useUnifiedTopology: true });
+  let dbURL = process.env.NODE_ENV == 'dev'? config.mongo_url_dev : config.mongo_url_docker;
+  const conn = await mongoose.connect(dbURL, config.connect_options);
   console.log(`MongoDB Connected`);
 }
 
