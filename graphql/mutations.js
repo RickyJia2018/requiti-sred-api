@@ -22,9 +22,6 @@ const register = {
         userData.status = 'active';
         userData.role = 'trial';
         const user = new User(userData);
-       
-        // return generateToken(userData);
-
         return await user.save();
         
     }
@@ -40,7 +37,7 @@ const login = {
     },
     async resolve(parent, args) {
         const user = await User.findOne({ email: args.email }).select("+password")
-        const validation = await compareEncryption(args.password,user.password);
+        const validation =user? await compareEncryption(args.password,user.password):false;
         if (!user || !validation) {
             throw new Error("Invalid credentials")
         }
