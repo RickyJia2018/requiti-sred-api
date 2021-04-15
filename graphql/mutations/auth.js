@@ -1,8 +1,8 @@
-const { UserType } = require("./types");
-const  User = require("../models/userModel");
-const { generateToken } = require("../util/tokenUtil");
+const { UserType } = require("../types");
+const  User = require("../../models/userModel");
+const { generateToken } = require("../../util/tokenUtil");
 const { GraphQLString } = require("graphql");
-const { encrypt, compareEncryption } = require('../util/encrypUtil');
+const { encrypt, compareEncryption } = require('../../util/encrypUtil');
 const register = {
     type: UserType,
     description: "Register user",
