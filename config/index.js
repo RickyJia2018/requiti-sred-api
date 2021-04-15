@@ -16,3 +16,5 @@ exports.connect_options  = {
     socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
     family: 4 // Use IPv4, skip trying IPv6
 };
+
+exports.jwt_expiry_seconds = 2592000 // 30 days
