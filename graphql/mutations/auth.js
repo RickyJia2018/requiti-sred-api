@@ -1,8 +1,10 @@
 const { UserType } = require("../types");
-const  User = require("../../models/userModel");
+// const  User = require("../../models/userModel");
+const Users = require('../../services/users')
 const { generateToken } = require("../../util/tokenUtil");
 const { GraphQLString } = require("graphql");
 const { encrypt, compareEncryption } = require('../../util/encrypUtil');
+const { user } = require("../queries");
 const register = {
     type: UserType,
     description: "Register user",
@@ -21,9 +23,8 @@ const register = {
         userData.password = encryptedPassword;
         userData.status = 'active';
         userData.role = 'trial';
-        const user = new User(userData);
-        return await user.save();
-        
+        return await Users.create(userData);
+
     }
 }
 

@@ -16,7 +16,7 @@ var UserSchema = new Schema({
     role: {
         type: String,
         enum : ['trial','normal','admin'],
-        required: false
+        default: 'trial'
     },
    
     acc_id: {

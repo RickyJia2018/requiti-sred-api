@@ -7,7 +7,7 @@ const queries = require('./queries');
 const RootQuery = new GraphQLObjectType({
     name: "RootQuery",
     description: "Queries",
-    fields: { users, user }
+    fields: queries
 })
 
 const RootMutation = new GraphQLObjectType({
