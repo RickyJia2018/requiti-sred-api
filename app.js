@@ -6,10 +6,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { graphqlHTTP } = require('express-graphql');
 const graphqlSchema = require('./graphql/schema');
+const paginate = require('express-paginate');
 
 const app = express();
 dotenv.config();
 // app.set('view engine', 'ejs');
+app.use(paginate.middleware(10, 20));
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -33,7 +35,6 @@ app.all('*', function(req, res, next) {
       res.setHeader('Access-Control-Allow-Origin', origin);
   }
 
-  //res.header("Access-Control-Allow-Origin", "https://cmpadmin.cocc.io");
   res.header("Access-Control-Allow-Credentials", "true");
   // authorization, x-token  token
   // token-from   admin/app
