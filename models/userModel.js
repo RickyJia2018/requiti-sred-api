@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 const mongoosePaginate = require('mongoose-paginate');
 const uniqueValidator = require('mongoose-unique-validator');
 var UserSchema = new Schema({
-    // id: {type: String},
     name: {
         type: String,
         required: true

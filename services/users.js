@@ -27,7 +27,7 @@ exports.findByCondition = async(query, option)=> {
 }
 
 exports.findAll = async()=> {
-    return await Users.find().limit(20);//paginate({},{offset: 20, limit: 10});
+    return await Users.find();//paginate({},{offset: 20, limit: 10});
 }
 
 exports.update = async (id, body)=> {
