@@ -1,7 +1,7 @@
 const { GrantType } = require("../types");
 // const  User = require("../../models/userModel");
 const Grants = require('../../services/grants')
-const { GraphQLString, GraphQLID } = require("graphql");
+const { GraphQLString, GraphQLID, GraphQLBoolean } = require("graphql");
 const { RoleEnumType } = require('../../helpers/enums');
 
 const addGrants = {
@@ -36,13 +36,14 @@ const updateGrants = {
     }
 }
 const deleteGrants = {
-    type: GrantType,
+    type: GraphQLBoolean,
     description: "Delete grant",
     args: {
         id: {type: GraphQLID},
     },
     async resolve(parent, args){
-        return await Grants.delete(args.id);
+        let result = await Grants.delete(args.id);
+        return result.n
     }
 }
 
