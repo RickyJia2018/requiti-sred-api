@@ -15,6 +15,10 @@ var GrantOptionSchema = new Schema({
    questionId: {
     type: String,
     required: true
+   },
+   grants: {
+       type: [String],
+       required: true
    }
 
 });

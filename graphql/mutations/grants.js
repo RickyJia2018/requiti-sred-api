@@ -16,7 +16,6 @@ const addGrants = {
     async resolve(parent, args){     
         let newData = {...args}
         return await Grants.create(newData);
-
     }
 }
 

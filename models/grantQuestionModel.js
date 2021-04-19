@@ -12,7 +12,6 @@ var GrantQuestionSchema = new Schema({
         type: String,
         required: false
     },
-   
 
 });
 

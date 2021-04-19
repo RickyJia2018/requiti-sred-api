@@ -1,6 +1,8 @@
 const { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLList } = require("graphql");
 const { RoleEnumType } = require('../helpers/enums')
 const Models = require('../models')
+const GrantService = require('../services/grants');
+
 const UserType = new GraphQLObjectType({
     name: "User",
     description: "User type",
@@ -53,7 +55,10 @@ const GrantOptionType = new GraphQLObjectType({
         name: { type: GraphQLString },
         description: { type: GraphQLString },
         grants: {
-            type: new GraphQLList(GraphQLID)
+            type: new GraphQLList(GrantType),
+            async resolve(parent, args){                 
+               return await GrantService.findByIds(parent.grants);
+            }
         }
     })
 })

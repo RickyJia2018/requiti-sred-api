@@ -6,8 +6,8 @@ const mongoose = require('mongoose');
 const Grants = mongoose.model('Grants');
 
 exports.create = async (data) => {
-    const Grants = mongoose.model('Grants');
-    let newGrants = new Grants(data);
+    const Grant = mongoose.model('Grants');
+    let newGrants = new Grant(data);
     return await newGrants.save();
 }
 
