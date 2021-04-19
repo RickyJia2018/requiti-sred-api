@@ -1,5 +1,5 @@
 const { UserType } = require("../types");
-// const  User = require("../../models/userModel");
+const  User = require("../../models/userModel");
 const Users = require('../../services/users')
 const { generateToken } = require("../../util/tokenUtil");
 const { GraphQLString } = require("graphql");
@@ -38,11 +38,12 @@ const login = {
     },
     async resolve(parent, args) {
         const user = await User.findOne({ email: args.email }).select("+password")
+
         const validation =user? await compareEncryption(args.password,user.password):false;
+
         if (!user || !validation) {
             throw new Error("Invalid credentials")
         }
-    
         const token = generateToken(user)
         return token
     },
