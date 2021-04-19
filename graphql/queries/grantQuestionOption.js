@@ -9,11 +9,11 @@ const grantOption = {
     args: {
         id: {type: GraphQLID },
     },
-    async resolve(parent,args){
-        let result = await GrantOptions.findById(args.id);
-        // let grants = await Grants.findByIds(result.grants);
-        // result.grants = grants
-        return result;
+    async resolve(parent,args,{verifiedUser}){
+        if(!verifiedUser) throw new Error("Unauthorized")
+
+        return await GrantOptions.findById(args.id);
+        
     }
 }
 

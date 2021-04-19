@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const { graphqlHTTP } = require('express-graphql');
 const graphqlSchema = require('./graphql/schema');
 const paginate = require('express-paginate');
-
+const { analysisToken } = require('./util/tokenUtil');
 const app = express();
 dotenv.config();
 // app.set('view engine', 'ejs');
@@ -42,6 +42,7 @@ app.all('*', function(req, res, next) {
   res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
   next();
 });
+app.use(analysisToken);
 app.use('/graphql',graphqlHTTP({
     schema: graphqlSchema, graphiql:true
 }));

@@ -12,7 +12,8 @@ const addGrantOption = {
        grants: {type: new GraphQLList(GraphQLID)}
 
     },
-    async resolve(parent, args){     
+    async resolve(parent, args,{verifiedUser}){     
+        if(!verifiedUser) throw new Error("Unauthorized")
         let newData = {...args}
         return await GrantOption.create(newData);
     }
@@ -30,7 +31,8 @@ const updateGrantOption = {
 
 
     },
-    async resolve(parent, args){     
+    async resolve(parent, args,{verifiedUser}){     
+        if(!verifiedUser) throw new Error("Unauthorized")
         let newData = {...args}
         return await GrantOption.update(args.id, newData);
     }
@@ -41,7 +43,8 @@ const deleteGrantOption = {
     args: {
         id: {type: GraphQLID},
     },
-    async resolve(parent, args){
+    async resolve(parent, args,{verifiedUser}){
+        if(!verifiedUser) throw new Error("Unauthorized")
         let result = await GrantOption.delete(args.id);
         return result.n
     }

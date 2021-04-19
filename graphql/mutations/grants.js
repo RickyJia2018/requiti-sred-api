@@ -13,7 +13,9 @@ const addGrants = {
         funds_amount: {type: GraphQLString},
        
     },
-    async resolve(parent, args){     
+    async resolve(parent, args,{verifiedUser}){    
+        if(!verifiedUser) throw new Error("Unauthorized")
+ 
         let newData = {...args}
         return await Grants.create(newData);
     }
@@ -29,7 +31,9 @@ const updateGrants = {
         funds_amount: {type: GraphQLString},
        
     },
-    async resolve(parent, args){     
+    async resolve(parent, args,{verifiedUser}){   
+        if(!verifiedUser) throw new Error("Unauthorized")
+  
         let newData = {...args}
         return await Grants.update(args.id, newData);
     }
@@ -40,7 +44,9 @@ const deleteGrants = {
     args: {
         id: {type: GraphQLID},
     },
-    async resolve(parent, args){
+    async resolve(parent, args,{verifiedUser}){
+        if(!verifiedUser) throw new Error("Unauthorized")
+
         let result = await Grants.delete(args.id);
         return result.n
     }

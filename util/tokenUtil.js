@@ -24,8 +24,11 @@ exports.analysisToken = async (req, res, next) => {
         console.log('Verification success!', payload);
         next();
     } catch (e) {
+        req.verifiedUser = false;
+
         console.log('Verification failed!');
-        throw new httpExceptions.CommonHttpErrorException("INVALID_TOKEN", "token", token);
+        next();
+        // throw new httpExceptions.CommonHttpErrorException("INVALID_TOKEN", "token", token);
     }
 
 

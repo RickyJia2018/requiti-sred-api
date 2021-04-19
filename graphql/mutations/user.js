@@ -19,9 +19,9 @@ const updateUser = {
         role: {type: GraphQLString},
         avatar: {type: GraphQLString},
     },
-    async resolve(parent, args){
-        console.log(args);
-     
+    async resolve(parent, args,{verifiedUser}){
+        if(!verifiedUser) throw new Error("Unauthorized")
+
         let newUser = {...args}
         // delete newUser.id
         return await Users.update(args.id, newUser);
