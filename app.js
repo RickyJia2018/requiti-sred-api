@@ -31,15 +31,15 @@ connectDB();
 app.all('*', function(req, res, next) {
   var allowedOrigins = ['https://app.requiti.com', 'http://app.requiti.com', 'http://api.requiti.com'];
   var origin = req.headers.origin;
-  // if(allowedOrigins.indexOf(origin) > -1){
-  //     res.setHeader('Access-Control-Allow-Origin', origin);
-  // }
-  res.setHeader('Access-Control-Allow-Origin', "*");
+  if(allowedOrigins.indexOf(origin) > -1){
+      res.header('Access-Control-Allow-Origin', origin);
+  }
+  // res.setHeader('Access-Control-Allow-Origin', "*");
 
   res.header("Access-Control-Allow-Credentials", "true");
   // authorization, x-token  token
   // token-from   admin/app
-  res.header("Access-Control-Allow-Headers", "Content-Type, Access-Token, authorization");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Access-Token, authorization, Authorization");
   res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
   next();
 });
