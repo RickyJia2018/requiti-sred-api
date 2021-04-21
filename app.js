@@ -31,9 +31,10 @@ connectDB();
 app.all('*', function(req, res, next) {
   var allowedOrigins = ['https://app.requiti.com', 'http://app.requiti.com', 'http://api.requiti.com'];
   var origin = req.headers.origin;
-  if(allowedOrigins.indexOf(origin) > -1){
-      res.setHeader('Access-Control-Allow-Origin', origin);
-  }
+  // if(allowedOrigins.indexOf(origin) > -1){
+  //     res.setHeader('Access-Control-Allow-Origin', origin);
+  // }
+  res.setHeader('Access-Control-Allow-Origin', "*");
 
   res.header("Access-Control-Allow-Credentials", "true");
   // authorization, x-token  token
