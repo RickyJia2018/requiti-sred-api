@@ -8,6 +8,7 @@ const { graphqlHTTP } = require('express-graphql');
 const graphqlSchema = require('./graphql/schema');
 const paginate = require('express-paginate');
 const { analysisToken } = require('./util/tokenUtil');
+const cors = require('cors');
 const app = express();
 dotenv.config();
 // app.set('view engine', 'ejs');
@@ -28,21 +29,25 @@ const connectDB = async () => {
 connectDB();
 
 // 配置跨域
-app.all('*', function(req, res, next) {
-  var allowedOrigins = ['https://app.requiti.com', 'http://app.requiti.com', 'http://api.requiti.com'];
-  var origin = req.headers.origin;
-  if(allowedOrigins.indexOf(origin) > -1){
-      res.header('Access-Control-Allow-Origin', origin);
-  }
-  // res.setHeader('Access-Control-Allow-Origin', "*");
+// app.all('*', function(req, res, next) {
+//   var allowedOrigins = ['https://app.requiti.com', 'http://app.requiti.com', 'http://api.requiti.com'];
+//   var origin = req.headers.origin;
+//   if(allowedOrigins.indexOf(origin) > -1){
+//       res.header('Access-Control-Allow-Origin', origin);
+//   }
+//   // res.setHeader('Access-Control-Allow-Origin', "*");
 
-  res.header("Access-Control-Allow-Credentials", "true");
-  // authorization, x-token  token
-  // token-from   admin/app
-  res.header("Access-Control-Allow-Headers", "Content-Type, Access-Token, authorization, Authorization");
-  res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
-  next();
-});
+//   res.header("Access-Control-Allow-Credentials", "true");
+//   // authorization, x-token  token
+//   // token-from   admin/app
+//   res.header("Access-Control-Allow-Headers", "Content-Type, Access-Token, authorization, Authorization");
+//   res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+//   next();
+// });
+app.use(cors());
+// app.use(cors({
+//   origin: 'http://app.requiti.com'
+// }));
 app.use(analysisToken);
 app.use('/graphql',graphqlHTTP({
     schema: graphqlSchema, graphiql:true
