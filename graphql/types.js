@@ -28,6 +28,7 @@ const GrantType = new GraphQLObjectType({
         name: { type: GraphQLString },
         funds_amount: { type: GraphQLString },
         description: { type: GraphQLString },
+        tag: { type: GraphQLString },
     })
 })
 const GrantQuestionType = new GraphQLObjectType({

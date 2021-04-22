@@ -11,7 +11,8 @@ const addGrants = {
         name: {type: GraphQLString},
         description: {type: GraphQLString},
         funds_amount: {type: GraphQLString},
-       
+        tag: { type: GraphQLString },
+
     },
     async resolve(parent, args,{verifiedUser}){    
         if(!verifiedUser) throw new Error("Unauthorized")
@@ -29,7 +30,8 @@ const updateGrants = {
         name: {type: GraphQLString},
         description: {type: GraphQLString},
         funds_amount: {type: GraphQLString},
-       
+        tag: { type: GraphQLString },
+
     },
     async resolve(parent, args,{verifiedUser}){   
         if(!verifiedUser) throw new Error("Unauthorized")
