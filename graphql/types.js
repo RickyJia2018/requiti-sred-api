@@ -63,8 +63,41 @@ const GrantOptionType = new GraphQLObjectType({
         }
     })
 })
+const SREDType = new GraphQLObjectType({
+    name: "SRED",
+    description: "SRED type",
+    fields: () => ({
+        id: { type: GraphQLID },
+        grant: {
+            type: GrantType,
+            async resolve(parent,args){
+                return await GrantService.findById(parent.grantId);
+            }
+        },
+        user:{
+            type: UserType,
+            async resolve(parent,args){
+                return await Models.user.findById(parent.userId);
+            }
+        },
+        name: { type: GraphQLString },
+        status: { type: GraphQLString },
+        description: { type: GraphQLString },
+        tag: { type: GraphQLString },
+        contract: { type: GraphQLString },
+        timesheet: { type: GraphQLString },
+        T2: { type: GraphQLString },
+        T4: { type: GraphQLString },
+        projectIntro: { type: GraphQLString },
+        supportingDoc1: { type: GraphQLString },
+        supportingDoc2: { type: GraphQLString },
+        supportingDoc3: { type: GraphQLString },
+
+    })
+})
 
 module.exports = { 
     UserType,GrantType,
-     GrantQuestionType, GrantOptionType 
+    GrantQuestionType, GrantOptionType,
+    SREDType, 
     };
