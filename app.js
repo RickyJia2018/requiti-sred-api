@@ -9,7 +9,14 @@ const graphqlSchema = require('./graphql/schema');
 const paginate = require('express-paginate');
 const { analysisToken } = require('./util/tokenUtil');
 const cors = require('cors');
+const multer = require('multer');
+const AWS = require('aws-sdk');
+const uuid = require('uuid/v4');
 const app = express();
+const s3 = new AWS.S3({
+  accessKeyId: 'AKIARWYWXN2S2457J3DZ',
+  secretAccessKey: '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'
+})
 dotenv.config();
 // app.set('view engine', 'ejs');
 app.use(paginate.middleware(10, 20));
@@ -57,6 +64,32 @@ app.get('/', (req, res) => {
   res.json({msg:'This is requiti API server. Please go to /graphql'})
 });
 
+const storage = multer.memoryStorage({
+  destination: function(req,file,callback){callback(null,'')}
+})
+const upload = multer({storage}).single('file');
+
+app.post('/upload',upload, function (req, res, next) {
+  if(!req.verifiedUser) {
+    res.status(400).send({data: "Unauthorized"})
+  }else{
+    let myFile = req.file.originalname.split(".");
+    const fileType = myFile[myFile.length - 1];
+    const params = {
+      Bucket: "requiti",
+      Key: `${uuid()}.${fileType}`,
+      Body: req.file.buffer,
+    }
+    s3.upload(params,(error,data)=>{
+      if(error){
+        res.status(500).send(error)
+      }
+      res.status(200).send({data: data})
+    })
+  }
+
+  
+});
 
 const port = 5000;
 
