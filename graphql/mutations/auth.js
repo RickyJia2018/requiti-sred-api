@@ -14,6 +14,8 @@ const register = {
         password: {type: GraphQLString},
         company: {type: GraphQLString},
         phone: {type: GraphQLString},
+        alter_contact:{ type: GraphQLString },
+
     },
     async resolve(parent, args){
         console.log(args);

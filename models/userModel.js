@@ -73,6 +73,10 @@ var UserSchema = new Schema({
         type: String,
         enum : ['inactive', 'active', 'blocked'],
         default: 'active'
+    },
+    alter_contact:{
+        type: String,
+        required: false
     }
 
 });

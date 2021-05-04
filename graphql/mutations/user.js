@@ -18,6 +18,8 @@ const updateUser = {
         status: {type: GraphQLString},
         role: {type: GraphQLString},
         avatar: {type: GraphQLString},
+        alter_contact:{ type: GraphQLString },
+
     },
     async resolve(parent, args,{verifiedUser}){
         if(!verifiedUser) throw new Error("Unauthorized")
