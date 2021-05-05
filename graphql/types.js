@@ -89,6 +89,7 @@ const SREDType = new GraphQLObjectType({
         T2: { type: GraphQLString },
         T4: { type: GraphQLString },
         projectIntro: { type: GraphQLString },
+        supportingDocs: { type: new GraphQLList(GraphQLString) },
         supportingDoc1: { type: GraphQLString },
         supportingDoc2: { type: GraphQLString },
         supportingDoc3: { type: GraphQLString },

@@ -51,6 +51,10 @@ var SREDSchema = new Schema({
         type: String,
         required: false
     },
+    supportingDocs: {
+        type: [String],
+        required: false
+    },
     supportingDoc1: {
         type: String,
         required: false
