@@ -1,7 +1,7 @@
 const { SREDType } = require("../types");
 // const  User = require("../../models/userModel");
 const SREDService = require('../../services/sred')
-const { GraphQLString, GraphQLID, GraphQLBoolean } = require("graphql");
+const { GraphQLString, GraphQLID, GraphQLBoolean, GraphQLList } = require("graphql");
 const { RoleEnumType } = require('../../helpers/enums');
 
 const addSREDProject = {
