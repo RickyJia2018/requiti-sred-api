@@ -77,7 +77,9 @@ app.post('/upload',upload, function (req, res, next) {
     const fileType = myFile[myFile.length - 1];
     const params = {
       Bucket: "requiti",
-      Key: `${uuid()}.${fileType}`,
+      Key: `${uuid()}-${req.file.originalname}`,
+
+      // Key: `${uuid()}.${fileType}`,
       Body: req.file.buffer,
     }
     s3.upload(params,(error,data)=>{
