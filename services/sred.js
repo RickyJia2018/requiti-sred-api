@@ -23,7 +23,7 @@ exports.findByIds = async (ids)=> {
 }
 
 exports.findByCondition = async(query, option)=> {
-    return await SRED.paginate(query, option);
+    return await SRED.find(query, option);
 }
 
 exports.findAll = async()=> {
