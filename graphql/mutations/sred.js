@@ -26,9 +26,9 @@ const addSREDProject = {
     },
     async resolve(parent, args,{verifiedUser}){    
         if(!verifiedUser) throw new Error("Unauthorized")
- 
+        console.log('verifiedUser.id \n\n',verifiedUser,'\n\n');
         let newData = {...args}
-        newData.userId = verifiedUser.id;
+        newData.userId = verifiedUser._id;
         return await SREDService.create(newData);
     }
 }
