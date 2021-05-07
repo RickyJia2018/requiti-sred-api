@@ -15,7 +15,7 @@ const SREDProjects = {
     async resolve(parent,args,{verifiedUser}){
         if(!verifiedUser) throw new Error("Unauthorized")
 
-        return await SREDService.findByCondition({userId: verifiedUser.id});
+        return await SREDService.findByCondition({userId: verifiedUser._id});
     }
 }
 const SREDProject = {
