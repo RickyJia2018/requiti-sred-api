@@ -3,6 +3,7 @@ const { UserType } = require("../types");
 const Users = require('../../services/users')
 const { GraphQLString, GraphQLID } = require("graphql");
 const { RoleEnumType } = require('../../helpers/enums');
+const { encrypt, compareEncryption } = require('../../util/encrypUtil');
 
 
 const updateUser = {
@@ -23,10 +24,20 @@ const updateUser = {
     },
     async resolve(parent, args,{verifiedUser}){
         if(!verifiedUser) throw new Error("Unauthorized")
+        // console.log(verifiedUser);
 
-        let newUser = {...args}
+        let newUserData = {...args}
+        if(newUserData.password){
+            const encryptedPassword =await encrypt(newUserData.password);
+            newUserData.password = encryptedPassword;
+
+        }
+        console.log('new user data:\n',newUserData);
         // delete newUser.id
-        return await Users.update(args.id, newUser);
+        let newUser = await Users.update(args.id, newUserData);
+
+        
+        console.log('new user is:\n\n\n',newUser);
 
     }
 }
