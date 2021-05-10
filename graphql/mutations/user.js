@@ -32,12 +32,10 @@ const updateUser = {
             newUserData.password = encryptedPassword;
 
         }
-        console.log('new user data:\n',newUserData);
         // delete newUser.id
-        let newUser = await Users.update(args.id, newUserData);
+        return await Users.update(args.id, newUserData);
 
         
-        console.log('new user is:\n\n\n',newUser);
 
     }
 }

@@ -1,7 +1,7 @@
 'use strict';
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const mongoosePaginate = require('mongoose-paginate');
+const mongoosePaginate = require('mongoose-paginate-v2');
 const uniqueValidator = require('mongoose-unique-validator');
 var GrantsSchema = new Schema({
     name: {

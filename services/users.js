@@ -2,6 +2,7 @@
 
 'use strict';
 
+const { Template } = require('ejs');
 const mongoose = require('mongoose');
 const Users = mongoose.model('Users');
 
@@ -26,8 +27,10 @@ exports.findByCondition = async(query, option)=> {
     return await Users.paginate(query, option);
 }
 
-exports.findAll = async()=> {
-    return await Users.find();//paginate({},{offset: 20, limit: 10});
+exports.findAll = async(option)=> {
+   return await Users.find();//paginate({},option);
+ 
+
 }
 
 exports.update = async (id, body)=> {

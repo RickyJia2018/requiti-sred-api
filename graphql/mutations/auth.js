@@ -18,7 +18,6 @@ const register = {
 
     },
     async resolve(parent, args){
-        console.log(args);
         const { name, email, password, company, phone } = args;
         const encryptedPassword =await encrypt(password);
         const userData = {name, email, company, phone}
