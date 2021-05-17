@@ -12,10 +12,13 @@ const allRoles = {
 }
 const roles = {
     type: new GraphQLList(RoleType),
+    args: {
+        company_id: {type: GraphQLID}
+    },
     async resolve(parent,args,{verifiedUser}){
         if(!verifiedUser) throw new Error("Unauthorized")
 
-        return await RoleService.findByCondition({userId: verifiedUser._id});
+        return await RoleService.findByCondition({company_id: args.company_id});
     }
 }
 const role = {

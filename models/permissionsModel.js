@@ -11,6 +11,9 @@ var PermissionSchema = new Schema({
     description: {
         type: String
     },
+    role_id:{
+        type: String
+    },
     url: {
         type: String,
         required: false

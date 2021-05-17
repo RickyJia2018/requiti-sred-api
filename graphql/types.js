@@ -129,6 +129,12 @@ const RoleType = new GraphQLObjectType({
             resolve(parent, args){
                 return Models.Company.findById(parent.company_id);
             }
+        },
+        permissions: {
+            type: PermissionType,
+            resolve(parent,args){
+                return Models.Permission.find({role_id: parent.id})
+            }
         }
     })
 })

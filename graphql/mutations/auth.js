@@ -12,10 +12,10 @@ const register = {
         name: {type: GraphQLString},
         email: {type: GraphQLString},
         password: {type: GraphQLString},
-        company: {type: GraphQLString},
+        company_id: {type: GraphQLString},
+        role_id: {type: GraphQLString},
         phone: {type: GraphQLString},
         alter_contact:{ type: GraphQLString },
-
     },
     async resolve(parent, args){
         const { name, email, password, company, phone } = args;
@@ -23,7 +23,7 @@ const register = {
         const userData = {name, email, company, phone}
         userData.password = encryptedPassword;
         userData.status = 'active';
-        userData.role = 'trial';
+        // userData.role = 'trial';
         return await Users.create(userData);
 
     }
