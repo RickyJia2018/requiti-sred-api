@@ -12,10 +12,18 @@ var UserSchema = new Schema({
         type: String,
         required: true
     },
+    company_id:{
+        type: String,
+        required: false
+    },
     role: {
         type: String,
         enum : ['trial','normal','admin'],
         default: 'trial'
+    },
+    role_id:{
+        type: String,
+        required: false
     },
    
     acc_id: {

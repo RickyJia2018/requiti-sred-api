@@ -24,7 +24,7 @@ exports.findByIds = async (ids)=> {
 }
 
 exports.findByCondition = async(query, option)=> {
-    return await Users.paginate(query, option);
+    return await Users.find(query, option);
 }
 
 exports.findAll = async(option)=> {

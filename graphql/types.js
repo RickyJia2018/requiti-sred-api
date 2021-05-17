@@ -2,21 +2,48 @@ const { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLList } = require("gr
 const { RoleEnumType } = require('../helpers/enums')
 const Models = require('../models')
 const GrantService = require('../services/grants');
-
+const UserService = require('../services/users');
 const UserType = new GraphQLObjectType({
     name: "User",
     description: "User type",
     fields: () => ({
         id: { type: GraphQLID },
         name: { type: GraphQLString },
-        company: { type: GraphQLString },
-        role: { type: RoleEnumType },
+        company: { 
+            type: CompanyType,
+            resolve(parent,args){
+               return Models.Company.findById(parent.company_id)
+            }
+         },
+        role: { 
+            type: RoleType,
+            resolve(parent,args){
+                return Models.Role.findById(parent.role_id)
+            }
+        },
         phone: { type: GraphQLString },
         email: { type: GraphQLString },
         avatar: { type: GraphQLString },
         status: { type: GraphQLString },
         alter_contact:{ type: GraphQLString },
         
+        
+    })
+})
+const CompanyType = new GraphQLObjectType({
+    name: "Company",
+    description: "Company type",
+    fields: () => ({
+        id: { type: GraphQLID },
+        name: { type: GraphQLString },
+        description: { type: GraphQLString },
+        status: { type: GraphQLString },
+        users: {
+            type: UserType,
+            resolve(parent,args){
+                return Models.User.find({company_id: parent.id});
+            }
+        }
     })
 })
 
@@ -77,28 +104,51 @@ const SREDType = new GraphQLObjectType({
         user:{
             type: UserType,
             async resolve(parent,args){
-                return await Models.user.findById(parent.userId);
+            return await Models.user.findById(parent.userId);
             }
         },
         name: { type: GraphQLString },
         status: { type: GraphQLString },
+    })
+})
+const RoleType = new GraphQLObjectType({
+    name: "Role",
+    description: "Role type",
+    fields: () => ({
+        id: { type: GraphQLID },
+        user:{
+            type: UserType,
+            async resolve(parent,args){
+                return UserService.findByCondition({role_id: parent.id})
+            }
+        },
+        name: { type: GraphQLString },
+        status: { type: GraphQLString },
+        company: {
+            type: CompanyType,
+            resolve(parent, args){
+                return Models.Company.findById(parent.company_id);
+            }
+        }
+    })
+})
+const PermissionType = new GraphQLObjectType({
+    name: "Permission",
+    description: "Permission type",
+    fields: () => ({
+        id: { type: GraphQLID },
+        name: { type: GraphQLString },
         description: { type: GraphQLString },
-        tag: { type: GraphQLString },
-        contract: { type: GraphQLString },
-        timesheet: { type: GraphQLString },
-        T2: { type: GraphQLString },
-        T4: { type: GraphQLString },
-        projectIntro: { type: GraphQLString },
-        supportingDocs: { type: new GraphQLList(GraphQLString) },
-        supportingDoc1: { type: GraphQLString },
-        supportingDoc2: { type: GraphQLString },
-        supportingDoc3: { type: GraphQLString },
-
+        url: { type: GraphQLString },
+        resource: { type: GraphQLString },
+        action: {type: GraphQLString},
+        status: { type: GraphQLString },
     })
 })
 
+
 module.exports = { 
-    UserType,GrantType,
+    UserType,GrantType, CompanyType,
     GrantQuestionType, GrantOptionType,
-    SREDType, 
+    SREDType, RoleType, PermissionType,
     };
