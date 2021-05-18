@@ -6,10 +6,10 @@ const SRED = require('./sredModel');
 const Role = require('./rolesModel');
 const Permission = require('./permissionsModel');
 const Company = require('./companiesModel');
-
+const RolePermission = require('./rolePermissionModel');
 module.exports = {
     User, Grants, 
     GrantQuestion, GrantOption,
     SRED, Role,
-    Permission, Company,
+    Permission, Company, RolePermission,
 }

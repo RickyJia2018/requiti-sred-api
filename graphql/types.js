@@ -152,9 +152,19 @@ const PermissionType = new GraphQLObjectType({
     })
 })
 
+const RolePermissionType = new GraphQLObjectType({
+    name: "RolePermission",
+    description: "bind role and permission",
+    fields: () => ({
+        id: { type: GraphQLID },
+        role_id: { type: GraphQLID },
+        permission_id: { type: GraphQLID },
+        
+    })
+})
 
 module.exports = { 
     UserType,GrantType, CompanyType,
     GrantQuestionType, GrantOptionType,
-    SREDType, RoleType, PermissionType,
+    SREDType, RoleType, PermissionType, RolePermissionType,
     };
