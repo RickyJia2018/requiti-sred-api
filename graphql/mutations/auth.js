@@ -5,6 +5,7 @@ const { generateToken } = require("../../util/tokenUtil");
 const { GraphQLString } = require("graphql");
 const { encrypt, compareEncryption } = require('../../util/encrypUtil');
 const { user } = require("../queries");
+const { Company, Role } = require("../../models");
 const register = {
     type: UserType,
     description: "Register user",
@@ -45,7 +46,11 @@ const login = {
         if (!user || !validation) {
             throw new Error("Invalid credentials")
         }
-        const token = generateToken(user)
+
+        let data = {...user};
+        const company = await Company.findById(user.company_id);
+        data['company'] = company;
+        const token = generateToken(data)
         return token
     },
   }

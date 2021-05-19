@@ -37,6 +37,13 @@ const CompanyType = new GraphQLObjectType({
         id: { type: GraphQLID },
         name: { type: GraphQLString },
         description: { type: GraphQLString },
+        phone: {type: GraphQLString},
+        country: { type: GraphQLString },
+        province: { type: GraphQLString },
+        city: { type: GraphQLString },
+        address: { type: GraphQLString },
+        postCode: { type: GraphQLString },
+        manager:{ type: GraphQLID },
         status: { type: GraphQLString },
         users: {
             type: UserType,
