@@ -7,7 +7,7 @@ const {allRoles, role, roles} = require('./role');
 const {allPermissions, permissions, permission} = require('./permission');
 const {companies, company} = require('./company');
 const { allRolePermissions, rolePermissions } = require('./rolePermission');
-
+const {allEvents, event, eventsByCompany, eventsByUser } = require('./event');
 module.exports = { 
     user, users,usersByCompany,
     grant, grants,
@@ -18,4 +18,5 @@ module.exports = {
     allPermissions, permissions, permission,
     companies, company,
     allRolePermissions, rolePermissions,
+    allEvents, event, eventsByCompany, eventsByUser,
  }

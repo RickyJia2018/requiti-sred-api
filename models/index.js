@@ -7,9 +7,11 @@ const Role = require('./rolesModel');
 const Permission = require('./permissionsModel');
 const Company = require('./companiesModel');
 const RolePermission = require('./rolePermissionModel');
+const Event = require('./eventModel');
 module.exports = {
     User, Grants, 
     GrantQuestion, GrantOption,
     SRED, Role,
     Permission, Company, RolePermission,
+    Event,
 }
