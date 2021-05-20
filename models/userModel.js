@@ -10,7 +10,7 @@ var UserSchema = new Schema({
     },
     company: {
         type: String,
-        required: true
+        required: false
     },
     company_id:{
         type: String,
