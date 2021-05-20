@@ -3,17 +3,13 @@
 const fs = require('fs');
 const path = require('path');
 const jwt = require('jsonwebtoken');
-const config = require('../config');
 
-const jwtExpirySeconds = config.jwt_expiry_seconds;
 const privateKey = fs.readFileSync(path.resolve(__dirname, '../config/jwtRS256.key'));
 const cert = fs.readFileSync(path.resolve(__dirname, '../config/jwtRS256.key.pub'));
 
 const httpExceptions = require('../exceptions/HttpExceptions');
-exports.generateToken = function (user) {
-    let temp = user.toJSON();
-    delete temp.password;
-    return jwt.sign(temp, privateKey, {algorithm: 'RS256', expiresIn: jwtExpirySeconds});
+exports.generateToken = function (data,expiresIn) {
+    return jwt.sign(data, privateKey, {algorithm: 'RS256', expiresIn: expiresIn});
 } 
 
 exports.analysisToken = async (req, res, next) => {

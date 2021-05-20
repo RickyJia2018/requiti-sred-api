@@ -6,6 +6,9 @@ const { GraphQLString } = require("graphql");
 const { encrypt, compareEncryption } = require('../../util/encrypUtil');
 const { user } = require("../queries");
 const { Company, Role } = require("../../models");
+const config = require('../../config');
+const jwtExpirySeconds = config.jwt_expiry_seconds;
+
 const register = {
     type: UserType,
     description: "Register user",
@@ -47,10 +50,11 @@ const login = {
             throw new Error("Invalid credentials")
         }
 
-        let data = {...user};
+        let data = user.toJSON();
         const company = await Company.findById(user.company_id);
         data['company'] = company;
-        const token = generateToken(data)
+        delete data.password;
+        const token = generateToken(data,jwtExpirySeconds)
         return token
     },
   }
