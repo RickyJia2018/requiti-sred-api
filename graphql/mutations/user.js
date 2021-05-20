@@ -14,10 +14,10 @@ const updateUser = {
         name: {type: GraphQLString},
         email: {type: GraphQLString},
         password: {type: GraphQLString},
-        company_id: {type: GraphQLString},
+        company_id: {type: GraphQLID},
         phone: {type: GraphQLString},
         status: {type: GraphQLString},
-        role_id: {type: GraphQLString},
+        role_id: {type: GraphQLID},
         avatar: {type: GraphQLString},
         alter_contact:{ type: GraphQLString },
 
