@@ -13,7 +13,7 @@ const company = {
     type: CompanyType,
     args: {id: {type: GraphQLID }},
     async resolve(parent,args,{verifiedUser}){
-        if(!verifiedUser) throw new Error("Unauthorized")
+        // if(!verifiedUser) throw new Error("Unauthorized")
         return await CompanyService.findById(args.id);
     }
 }

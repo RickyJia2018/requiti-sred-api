@@ -25,7 +25,7 @@ const role = {
     type: RoleType,
     args: {id: {type: GraphQLID }},
     async resolve(parent,args,{verifiedUser}){
-        if(!verifiedUser) throw new Error("Unauthorized")
+        // if(!verifiedUser) throw new Error("Unauthorized")
 
         return await RoleService.findById(args.id);
     }
