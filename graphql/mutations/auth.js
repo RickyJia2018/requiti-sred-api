@@ -51,7 +51,7 @@ const login = {
         }
 
         let data = user.toJSON();
-        const company = await Company.findById(user.company_id);
+        const company = await Company.findById(data.company_id);
         data['company'] = company;
         delete data.password;
         const token = generateToken(data,jwtExpirySeconds)
