@@ -19,4 +19,13 @@ const user = {
     }
 }
 
-module.exports = { users, user }
+const usersByCompany = {
+    type: new GraphQLList(UserType),
+    args: {company_id: {type: GraphQLID }},
+    async resolve(parent,args,{verifiedUser}){
+        if(!verifiedUser) throw new Error("Unauthorized")
+        return await User.findByCondition({company_id: args.company_id})
+    }
+}
+
+module.exports = { users, user, usersByCompany }

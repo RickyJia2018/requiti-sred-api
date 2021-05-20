@@ -22,3 +22,5 @@ exports.connect_options  = {
 exports.jwt_expiry_seconds = 2592000 // 30 days
 
 exports.saltRounds=10;
+
+exports.MailGun_API = "96440d9709e76737188d89b531aa28d3-6ae2ecad-4113c1ac"

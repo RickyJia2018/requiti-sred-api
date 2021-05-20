@@ -1,4 +1,4 @@
-const {user, users} = require('./user');
+const {user, users, usersByCompany} = require('./user');
 const {grant, grants} = require('./grants');
 const {grantQuestion, grantQuestions} = require('./grantQuestion');
 const {grantOption} = require('./grantQuestionOption');
@@ -9,7 +9,7 @@ const {companies, company} = require('./company');
 const { allRolePermissions, rolePermissions } = require('./rolePermission');
 
 module.exports = { 
-    user, users,
+    user, users,usersByCompany,
     grant, grants,
     grantQuestion, grantQuestions,
     grantOption,
