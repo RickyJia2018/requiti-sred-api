@@ -1,4 +1,4 @@
-const {GraphQLObjectType, GraphQLID, GraphQLString, GraphQLList, GraphQLFloat} = require("graphql");
+const {GraphQLObjectType, GraphQLID, GraphQLString, GraphQLList, GraphQLFloat, GraphQLInt} = require("graphql");
 const {RoleEnumType} = require('../helpers/enums')
 const Models = require('../models')
 const GrantService = require('../services/grants');
@@ -279,6 +279,9 @@ const EventType = new GraphQLObjectType({
         hours: {
             type: GraphQLFloat
         },
+        employee_id:{
+            type: GraphQLString
+        },
         user_id: {
             type: GraphQLString
         },
@@ -312,6 +315,27 @@ const EventType = new GraphQLObjectType({
     })
 })
 
+const EmployeeType = new GraphQLObjectType({
+    name: "Emplyee",
+    fields: () => ({
+        id: {type: GraphQLID},
+        name: {type: GraphQLString},
+        education:{type: GraphQLString},
+        position:{type: GraphQLString},
+        nature:{type: GraphQLString},
+        experience:{type: GraphQLString},
+        sred_hours:{type: GraphQLFloat},
+        total_hours:{type: GraphQLFloat},
+        sred_salary:{type: GraphQLFloat},
+        total_salary:{type: GraphQLFloat},
+        year:{type: GraphQLInt},
+        company_id:{type: GraphQLString},
+        remark: {type: GraphQLString},
+        status: {type: GraphQLString},
+    })
+})
+
+
 module.exports = {
     UserType,
     GrantType,
@@ -322,5 +346,5 @@ module.exports = {
     RoleType,
     PermissionType,
     RolePermissionType,
-    EventType
+    EventType,EmployeeType,
 };

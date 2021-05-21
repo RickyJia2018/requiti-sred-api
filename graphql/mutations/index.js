@@ -9,7 +9,7 @@ const { addPermission, updatePermission, deletePermission } = require('./permiss
 const { addCompany, updateCompany, deleteCompany } = require('./company');
 const { addRolePermission, deleteRolePermission } = require('./rolePermission');
 const { addEvent, updateEvent, deleteEvent} = require('./event');
-
+const { addEmployee, updateEmployee, deleteEmployee } = require('./employee');
 
 module.exports = { 
     register, login, 
@@ -23,5 +23,6 @@ module.exports = {
     addCompany, updateCompany, deleteCompany,
     addRolePermission, deleteRolePermission ,
     addEvent, updateEvent, deleteEvent,
+    addEmployee, updateEmployee, deleteEmployee,
 
 }

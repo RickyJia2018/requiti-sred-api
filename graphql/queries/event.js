@@ -20,15 +20,15 @@ const eventsByCompany = {
         return await EventService.findByCondition({company_id: args.company_id});
     }
 }
-const eventsByUser = {
+const eventsByEmployee = {
     type: new GraphQLList(EventType),
     args: {
-        user_id: {type: GraphQLID}
+        empolyee_id: {type: GraphQLID}
     },
     async resolve(parent,args,{verifiedUser}){
         if(!verifiedUser) throw new Error("Unauthorized")
 
-        return await EventService.findByCondition({user_id: args.user_id});
+        return await EventService.findByCondition({empolyee_id: args.empolyee_id});
     }
 }
 const event = {
@@ -41,4 +41,4 @@ const event = {
     }
 }
 
-module.exports = { allEvents, event, eventsByCompany, eventsByUser }
+module.exports = { allEvents, event, eventsByCompany, eventsByEmployee }
