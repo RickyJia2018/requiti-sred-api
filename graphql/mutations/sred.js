@@ -9,7 +9,7 @@ const addSREDProject = {
     description: "Create new sred project.",
     args: {
         grantId: {type: GraphQLID },
-        // userId:{ type: GraphQLID,  },
+        company_id: {type: GraphQLID },
         name: { type: GraphQLString },
         status: { type: GraphQLString },
         description: { type: GraphQLString },
@@ -38,6 +38,7 @@ const updateSREDProject = {
     description: "Update user info",
     args: {
         id: {type: GraphQLID},
+        company_id: {type: GraphQLID },
         grantId: {type: GraphQLID },
         userId:{ type: GraphQLID,  },
         name: { type: GraphQLString },

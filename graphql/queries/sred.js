@@ -27,5 +27,13 @@ const SREDProject = {
         return await SREDService.findById(args.id);
     }
 }
+const SREDProjectsByCompany = {
+    type: new GraphQLList(SREDType),
+    args: {company_id: {type: GraphQLID }},
+    async resolve(parent,args,{verifiedUser}){
+        if(!verifiedUser) throw new Error("Unauthorized")
+        return await SREDService.findByCondition({company_id: args.company_id});
+    }
+}
 
-module.exports = { allSREDProjects, SREDProjects, SREDProject }
+module.exports = { allSREDProjects, SREDProjects, SREDProject, SREDProjectsByCompany }

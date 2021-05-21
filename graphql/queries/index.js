@@ -2,7 +2,7 @@ const {user, users, usersByCompany} = require('./user');
 const {grant, grants} = require('./grants');
 const {grantQuestion, grantQuestions} = require('./grantQuestion');
 const {grantOption} = require('./grantQuestionOption');
-const {allSREDProjects, SREDProjects, SREDProject} = require('./sred');
+const {allSREDProjects, SREDProjects, SREDProject, SREDProjectsByCompany} = require('./sred');
 const {allRoles, role, roles} = require('./role');
 const {allPermissions, permissions, permission} = require('./permission');
 const {companies, company} = require('./company');
@@ -13,7 +13,7 @@ module.exports = {
     grant, grants,
     grantQuestion, grantQuestions,
     grantOption,
-    allSREDProjects, SREDProjects, SREDProject,
+    allSREDProjects, SREDProjects, SREDProject,SREDProjectsByCompany,
     allRoles, role, roles,
     allPermissions, permissions, permission,
     companies, company,

@@ -8,6 +8,10 @@ var SREDSchema = new Schema({
         type: String,
         required: true
     },
+    company_id: {
+        type: String,
+        required: true
+    },
     grantId: {
         type: String,
         required: false
