@@ -6,7 +6,6 @@ var RoleSchema = new Schema({
     name: {
         type: String,
         required: true,
-        unique: true,
         index:true
     },
     remark: {
