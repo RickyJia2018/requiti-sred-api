@@ -2,7 +2,7 @@ const { UserType } = require("../types");
 const  User = require("../../models/userModel");
 const Users = require('../../services/users')
 const { generateToken } = require("../../util/tokenUtil");
-const { GraphQLString } = require("graphql");
+const { GraphQLString, GraphQLID} = require("graphql");
 const { encrypt, compareEncryption } = require('../../util/encrypUtil');
 const { user } = require("../queries");
 const { Company, Role } = require("../../models");
@@ -16,8 +16,8 @@ const register = {
         name: {type: GraphQLString},
         email: {type: GraphQLString},
         password: {type: GraphQLString},
-        company_id: {type: GraphQLString},
-        role_id: {type: GraphQLString},
+        company_id: {type: GraphQLID},
+        role_id: {type: GraphQLID},
         phone: {type: GraphQLString},
         alter_contact:{ type: GraphQLString },
     },
