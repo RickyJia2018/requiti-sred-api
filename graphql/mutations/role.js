@@ -14,7 +14,7 @@ const addRole = {
 
     },
     async resolve(parent, args,{verifiedUser}){    
-        if(!verifiedUser) throw new Error("Unauthorized")
+        // if(!verifiedUser) throw new Error("Unauthorized")
         let newData = {...args}
         return await Role.create(newData);
     }
