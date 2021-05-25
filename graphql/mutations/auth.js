@@ -22,12 +22,11 @@ const register = {
         alter_contact:{ type: GraphQLString },
     },
     async resolve(parent, args){
-        const { name, email, password, company, phone } = args;
+        const { name, email, password, company_id, role_id, phone } = args;
         const encryptedPassword =await encrypt(password);
-        const userData = {name, email, company, phone}
+        const userData = {name, email, phone, company_id, role_id}
         userData.password = encryptedPassword;
         userData.status = 'active';
-        // userData.role = 'trial';
         return await Users.create(userData);
 
     }
