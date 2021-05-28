@@ -97,27 +97,56 @@ app.post('/upload',upload, function (req, res, next) {
 });
 
 app.post('/invite-user',function(req,res){
+  if(!req.verifiedUser) {
+    res.status(400).send({data: "Unauthorized"})
+  }else{
+    const DOMAIN = 'app.requiti.com';
+    const mg = mailgun({apiKey: config.MailGun_API, domain: DOMAIN});
+    const data = {
+    from: 'Requiti Team <NO-Reply@requiti.com>',
+    to: req.body.email,
+    subject: 'mailgun test',
+    html: `<p>You are invited to join ${req.body.company_name}.</p><a href="http://app.requiti.com/authentication/Register?company_id=${req.body.company_id}&role_id=${req.body.role_id}">Accept Invitation</a>`
+    };
+    mg.messages().send(data, function (error, body) {
+      if(error){
+        res.send({
+          error: error
+        })
+      }else{
+        res.send({
+          success: body
+        })
+      }
+    
+    });
+  } 
 
-  const DOMAIN = 'app.requiti.com';
-  const mg = mailgun({apiKey: config.MailGun_API, domain: DOMAIN});
-  const data = {
-	from: 'Requiti Team <NO-Reply@requiti.com>',
-	to: req.body.email,
-	subject: 'mailgun test',
-	html: `<p>You are invited to join ${req.body.company_name}.</p><a href="http://app.requiti.com/authentication/Register?company_id=${req.body.company_id}&role_id=${req.body.role_id}">Accept Invitation</a>`
-  };
-  mg.messages().send(data, function (error, body) {
-    if(error){
-      res.send({
-        error: error
-      })
-    }else{
-      res.send({
-        success: body
-      })
-    }
-  
+})
+
+app.post('/send-email',function(req,res){
+  if(!req.verifiedUser) {
+    res.status(400).send({data: "Unauthorized"})
+  }else{
+    const DOMAIN = 'app.requiti.com';
+    const mg = mailgun({apiKey: config.MailGun_API, domain: DOMAIN});
+    const data = {
+    from: "Requiti Notification <robot@requiti.com>",
+    to: req.body.to,
+    subject: req.body.subject,
+    html: req.body.content };
+    mg.messages().send(data, function (error, body) {
+      if(error){
+        res.send({
+          error: error
+        })
+      }else{
+        res.send({
+          success: body
+        })
+      }
   });
+}
 
 })
 
