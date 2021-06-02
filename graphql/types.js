@@ -329,7 +329,11 @@ const EmployeeType = new GraphQLObjectType({
         sred_salary:{type: GraphQLFloat},
         total_salary:{type: GraphQLFloat},
         year:{type: GraphQLInt},
-        company_id:{type: GraphQLString},
+        company_id:{type: GraphQLID},
+        user_id:{type: GraphQLID},
+        user:{type: UserType, resolve(parent, args){
+            return Models.User.findById(parent.user_id);
+        }},
         remark: {type: GraphQLString},
         status: {type: GraphQLString},
     })
