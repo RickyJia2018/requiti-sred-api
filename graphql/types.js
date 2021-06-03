@@ -259,6 +259,12 @@ const RolePermissionType = new GraphQLObjectType({
         },
         permission_id: {
             type: GraphQLID
+        },
+        permission:{
+            type: PermissionType,
+            resolve(parent,args){
+                return Models.Permission.findById(parent.permission_id);
+            }
         }
     })
 })
