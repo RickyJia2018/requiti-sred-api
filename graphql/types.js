@@ -80,6 +80,9 @@ const CompanyType = new GraphQLObjectType({
         manager: {
             type: GraphQLID
         },
+        permissions:{
+            type: new GraphQLList(GraphQLString)
+        },
         status: {
             type: GraphQLString
         },

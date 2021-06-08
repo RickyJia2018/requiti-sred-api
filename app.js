@@ -105,8 +105,8 @@ app.post('/invite-user',function(req,res){
     const data = {
     from: 'Requiti Team <NO-Reply@requiti.com>',
     to: req.body.email,
-    subject: 'mailgun test',
-    html: `<p>You are invited to join ${req.body.company_name}.</p><a href="http://app.requiti.com/authentication/Register?company_id=${req.body.company_id}&role_id=${req.body.role_id}">Accept Invitation</a>`
+    subject: 'Platform Invitation',
+    html: `<p>Greetings,</p><p>You are invited to join ${req.body.company_name}.</p><a href="http://app.requiti.com/authentication/Register?company_id=${req.body.company_id}&role_id=${req.body.role_id}">Accept Invitation</a>`
     };
     mg.messages().send(data, function (error, body) {
       if(error){
