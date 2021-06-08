@@ -30,9 +30,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Connect to MongoDB
 const connectDB = async () => {
-  // let dbURL = process.env.NODE_ENV == 'dev'? config.mongo_url_dev : config.mongo_url_docker;
-
-  let dbURL = config.mongo_url_dev;
+  let dbURL = config.mongo_url;
   const conn = await mongoose.connect(dbURL, config.connect_options);
   console.log(`MongoDB Connected`);
 }
