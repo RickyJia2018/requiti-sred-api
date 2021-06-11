@@ -160,6 +160,15 @@ const GrantOptionType = new GraphQLObjectType({
             async resolve(parent, args) {
                 return await GrantService.findByIds(parent.grants);
             }
+        },
+        next_question_id:{
+            type: GraphQLID
+        },
+        next_question:{
+            type: GrantQuestionType,
+            resolve(parent,args){
+                return Models.GrantQuestion.findById(parent.next_question_id);
+            }
         }
     })
 })
