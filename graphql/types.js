@@ -1,4 +1,4 @@
-const {GraphQLObjectType, GraphQLID, GraphQLString, GraphQLList, GraphQLFloat, GraphQLInt} = require("graphql");
+const {GraphQLObjectType, GraphQLID, GraphQLString, GraphQLList, GraphQLFloat, GraphQLInt, GraphQLBoolean} = require("graphql");
 const {RoleEnumType} = require('../helpers/enums')
 const Models = require('../models')
 const GrantService = require('../services/grants');
@@ -130,6 +130,9 @@ const GrantQuestionType = new GraphQLObjectType({
         },
         description: {
             type: GraphQLString
+        },
+        first_question: {
+            type: GraphQLBoolean
         },
         options: {
             type: new GraphQLList(GrantOptionType),
