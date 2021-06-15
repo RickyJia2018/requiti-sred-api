@@ -11,6 +11,10 @@ var RolePermissionSchema = new Schema({
         type: String,
         required: true,
     },
+    action: {
+        type: String,
+        required: true,
+    },
   
 });
 

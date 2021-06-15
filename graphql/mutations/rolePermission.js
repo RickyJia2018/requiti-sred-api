@@ -9,6 +9,7 @@ const addRolePermission = {
     args: {
         role_id:{type: GraphQLID},
         permission_id:{type: GraphQLID},
+        action:{type:GraphQLString}
     },
     async resolve(parent, args,{verifiedUser}){    
         if(!verifiedUser) throw new Error("Unauthorized")
@@ -16,6 +17,23 @@ const addRolePermission = {
         return await RolePermission.create(newData);
     }
 }
+
+
+const updateRolePermission = {
+    type: RoleType,
+    description: "Update Role Permission",
+    args: {
+        role_id: { type: GraphQLID },
+        permission_id:{type:GraphQLID},
+        action:{type:GraphQLString}
+    },
+    async resolve(parent, args,{verifiedUser}){     
+        if(!verifiedUser) throw new Error("Unauthorized")
+        let newData = {...args}
+        return await GrantOption.update(args.id, newData);
+    }
+}
+
 
 const deleteRolePermission = {
     type: GraphQLBoolean,
@@ -31,4 +49,4 @@ const deleteRolePermission = {
     }
 }
 
-module.exports = { addRolePermission, deleteRolePermission }
+module.exports = { addRolePermission, updateRolePermission,deleteRolePermission }
