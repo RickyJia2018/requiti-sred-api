@@ -30,9 +30,10 @@ const updateRolePermission = {
     async resolve(parent, args,{verifiedUser}){     
         if(!verifiedUser) throw new Error("Unauthorized")
         let newData = {...args}
-        return await GrantOption.update(args.id, newData);
+        return await RolePermission.update(args.id, newData);
     }
 }
+
 
 
 const deleteRolePermission = {
