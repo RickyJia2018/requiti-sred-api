@@ -67,10 +67,7 @@ var SREDSchema = new Schema({
         type: String,
         required: false
     },
-    supportingDoc3: {
-        type: String,
-        required: false
-    },
+    
 });
 
 SREDSchema.plugin(mongoosePaginate);

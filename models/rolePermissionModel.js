@@ -13,7 +13,8 @@ var RolePermissionSchema = new Schema({
     },
     action: {
         type: String,
-        required: true,
+        enum : ['allow','deny'],
+        default: 'allow'
     },
   
 });
