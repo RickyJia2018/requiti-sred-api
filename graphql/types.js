@@ -253,9 +253,6 @@ const PermissionType = new GraphQLObjectType({
         resource: {
             type: GraphQLString
         },
-        action: {
-            type: GraphQLString
-        },
         status: {
             type: GraphQLString
         }
@@ -271,6 +268,9 @@ const RolePermissionType = new GraphQLObjectType({
         },
         role_id: {
             type: GraphQLID
+        },
+        action: {
+            type: GraphQLString,
         },
         permission_id: {
             type: GraphQLID

@@ -7,7 +7,7 @@ const { addSREDProject, updateSREDProject, deleteSREDProject} = require('./sred'
 const { addRole, updateRole, deleteRole } = require('./role');
 const { addPermission, updatePermission, deletePermission } = require('./permission');
 const { addCompany, updateCompany, deleteCompany } = require('./company');
-const { addRolePermission, deleteRolePermission } = require('./rolePermission');
+const { addRolePermission, updateRolePermission, deleteRolePermission } = require('./rolePermission');
 const { addEvent, updateEvent, deleteEvent} = require('./event');
 const { addEmployee, updateEmployee, deleteEmployee } = require('./employee');
 
@@ -21,7 +21,7 @@ module.exports = {
     addRole, updateRole, deleteRole,
     addPermission, updatePermission, deletePermission,
     addCompany, updateCompany, deleteCompany,
-    addRolePermission, deleteRolePermission ,
+    addRolePermission, updateRolePermission, deleteRolePermission ,
     addEvent, updateEvent, deleteEvent,
     addEmployee, updateEmployee, deleteEmployee,
 

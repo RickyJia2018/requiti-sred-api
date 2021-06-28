@@ -12,7 +12,6 @@ const addPermission = {
         url: { type: GraphQLString },
         role_id: { type: GraphQLID },
         resource: { type: GraphQLString },
-        action: { type: GraphQLString },
         remark: { type: GraphQLString },
         status: { type: GraphQLString },
 
@@ -34,7 +33,6 @@ const updatePermission = {
         url: { type: GraphQLString },
         role_id: { type: GraphQLID },
         resource: { type: GraphQLString },
-        action: { type: GraphQLString },
         remark: { type: GraphQLString },
         status: { type: GraphQLString },
     },

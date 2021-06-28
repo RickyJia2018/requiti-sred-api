@@ -11,7 +11,11 @@ var RolePermissionSchema = new Schema({
         type: String,
         required: true,
     },
-  
+    action: {
+        type: String,
+        enum : ['allow', 'deny'],
+        default: 'allow'
+    },
 });
 
 RolePermissionSchema.plugin(uniqueValidator);
