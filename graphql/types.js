@@ -13,14 +13,52 @@ const UserType = new GraphQLObjectType({
         name: {
             type: GraphQLString
         },
+        // company: {
+            
+        //     type: new GraphQLList(GraphQLString),
+        //     resolve(parent, args) {
+        //         //console.log(Models.Company.find({company_id:parent.id}))
+        //         return Models
+        //             .Company
+        //             .find({company_id:parent.id})
+        // async resolve(parent, args) {
+        //     return await GrantService.findByIds(parent.grants);
+        //     }
+        // },
         company: {
             type: CompanyType,
-            resolve(parent, args) {
-                return Models
+            async resolve(parent, args) {
+                return await Models
                     .Company
                     .findById(parent.company_id)
             }
         },
+
+        company_ids: {
+            type : new GraphQLList(GraphQLString),
+            
+        },
+
+        companies: {
+            type: new GraphQLList(CompanyType),
+            async resolve (parent,args){
+                let companies = []
+                Promise.all(
+                    companies = parent.company_ids.map(async (id)=> await Models.Company.findById(id))
+                )
+                console.log(companies)
+                return companies
+            }
+        },
+        
+        // Promise.all(
+        //     options.map(async (opt)=> await deleteOption(opt))
+        // ).then(()=>{
+        //     deleteQuestion()
+
+        // })
+
+        
         role: {
             type: RoleType,
             resolve(parent, args) {
@@ -46,6 +84,8 @@ const UserType = new GraphQLObjectType({
         }
     })
 })
+
+
 const CompanyType = new GraphQLObjectType({
     name: "Company",
     description: "Company type",
@@ -137,6 +177,7 @@ const GrantQuestionType = new GraphQLObjectType({
         options: {
             type: new GraphQLList(GrantOptionType),
             resolve(parent, args) {
+                //console.log(parent)
                 return Models
                     .GrantOption
                     .find({questionId: parent.id})

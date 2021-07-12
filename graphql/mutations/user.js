@@ -1,7 +1,7 @@
 const { UserType } = require("../types");
 // const  User = require("../../models/userModel");
 const Users = require('../../services/users')
-const { GraphQLString, GraphQLID } = require("graphql");
+const { GraphQLString, GraphQLID, GraphQLList } = require("graphql");
 const { RoleEnumType } = require('../../helpers/enums');
 const { encrypt, compareEncryption } = require('../../util/encrypUtil');
 
@@ -13,6 +13,7 @@ const updateUser = {
         id: {type: GraphQLID},
         name: {type: GraphQLString},
         email: {type: GraphQLString},
+        company_ids: {type: new GraphQLList(GraphQLString) },
         password: {type: GraphQLString},
         company_id: {type: GraphQLID},
         phone: {type: GraphQLString},
