@@ -17,7 +17,7 @@ const addPermission = {
 
     },
     async resolve(parent, args,{verifiedUser}){    
-        if(!verifiedUser) throw new Error("Unauthorized")
+        // if(!verifiedUser) throw new Error("Unauthorized")
         let newData = {...args}
         return await Permission.create(newData);
     }
@@ -37,7 +37,7 @@ const updatePermission = {
         status: { type: GraphQLString },
     },
     async resolve(parent, args,{verifiedUser}){   
-        if(!verifiedUser) throw new Error("Unauthorized")
+        // if(!verifiedUser) throw new Error("Unauthorized")
   
         let newData = {...args}
         return await Permission.update(args.id, newData);
@@ -50,7 +50,7 @@ const deletePermission = {
         id: {type: GraphQLID},
     },
     async resolve(parent, args,{verifiedUser}){
-        if(!verifiedUser) throw new Error("Unauthorized")
+        // if(!verifiedUser) throw new Error("Unauthorized")
 
         let result = await Permission.delete(args.id);
         return result.n
