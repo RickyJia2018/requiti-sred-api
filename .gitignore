@@ -1,6 +1,6 @@
 node_modules/
 package-lock.json
-config/index.json
+config/index.js
 config/jwtRS256.key
-config/jwtRS256.pub
+config/jwtRS256.key.pub
 
