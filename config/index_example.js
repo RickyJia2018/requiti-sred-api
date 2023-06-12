@@ -1,5 +1,8 @@
 // mongodb
-exports.connect_string ='1'; //dev
+// Product
+// exports.mongo_url = `mongodb://mongo:27017/docker-node-mongo`
+exports.mongo_url = process.env.NODE_ENV === "production" ? `mongodb://localhost/requiti` : `mongodb+srv://root:gucheng123@cluster0.wcgvt.mongodb.net/requitiDB?retryWrites=true&w=majority`
+
 
 exports.mongo_url_docker = `mongodb://mongo:27017/docker-node-mongo`
 exports.mongo_url_dev = `mongodb+srv://root:fake@cluster0.wcgvt.mongodb.net/requitiDB?retryWrites=true&w=majority`

@@ -27,11 +27,6 @@ var PermissionSchema = new Schema({
         enum : ["POST", "GET", "PUT", "DELETE"],
         default: 'GET'
     }],
-    action: {
-        type: String,
-        enum : ['allow', 'deny'],
-        default: 'allow'
-    },
     remark: {
         type: String,
         required: false

@@ -1,4 +1,4 @@
-const {GraphQLObjectType, GraphQLID, GraphQLString, GraphQLList, GraphQLFloat, GraphQLInt} = require("graphql");
+const {GraphQLObjectType, GraphQLID, GraphQLString, GraphQLList, GraphQLFloat, GraphQLInt, GraphQLBoolean} = require("graphql");
 const {RoleEnumType} = require('../helpers/enums')
 const Models = require('../models')
 const GrantService = require('../services/grants');
@@ -13,14 +13,52 @@ const UserType = new GraphQLObjectType({
         name: {
             type: GraphQLString
         },
+        // company: {
+            
+        //     type: new GraphQLList(GraphQLString),
+        //     resolve(parent, args) {
+        //         //console.log(Models.Company.find({company_id:parent.id}))
+        //         return Models
+        //             .Company
+        //             .find({company_id:parent.id})
+        // async resolve(parent, args) {
+        //     return await GrantService.findByIds(parent.grants);
+        //     }
+        // },
         company: {
             type: CompanyType,
-            resolve(parent, args) {
-                return Models
+            async resolve(parent, args) {
+                return await Models
                     .Company
                     .findById(parent.company_id)
             }
         },
+
+        company_ids: {
+            type : new GraphQLList(GraphQLString),
+            
+        },
+
+        companies: {
+            type: new GraphQLList(CompanyType),
+            async resolve (parent,args){
+                let companies = []
+                Promise.all(
+                    companies = parent.company_ids.map(async (id)=> await Models.Company.findById(id))
+                )
+                console.log(companies)
+                return companies
+            }
+        },
+        
+        // Promise.all(
+        //     options.map(async (opt)=> await deleteOption(opt))
+        // ).then(()=>{
+        //     deleteQuestion()
+
+        // })
+
+        
         role: {
             type: RoleType,
             resolve(parent, args) {
@@ -46,6 +84,8 @@ const UserType = new GraphQLObjectType({
         }
     })
 })
+
+
 const CompanyType = new GraphQLObjectType({
     name: "Company",
     description: "Company type",
@@ -79,6 +119,9 @@ const CompanyType = new GraphQLObjectType({
         },
         manager: {
             type: GraphQLID
+        },
+        permissions:{
+            type: new GraphQLList(GraphQLString)
         },
         status: {
             type: GraphQLString
@@ -128,9 +171,13 @@ const GrantQuestionType = new GraphQLObjectType({
         description: {
             type: GraphQLString
         },
+        first_question: {
+            type: GraphQLBoolean
+        },
         options: {
             type: new GraphQLList(GrantOptionType),
             resolve(parent, args) {
+                //console.log(parent)
                 return Models
                     .GrantOption
                     .find({questionId: parent.id})
@@ -156,6 +203,15 @@ const GrantOptionType = new GraphQLObjectType({
             type: new GraphQLList(GrantType),
             async resolve(parent, args) {
                 return await GrantService.findByIds(parent.grants);
+            }
+        },
+        next_question_id:{
+            type: GraphQLID
+        },
+        next_question:{
+            type: GrantQuestionType,
+            resolve(parent,args){
+                return Models.GrantQuestion.findById(parent.next_question_id);
             }
         }
     })
@@ -238,9 +294,6 @@ const PermissionType = new GraphQLObjectType({
         resource: {
             type: GraphQLString
         },
-        action: {
-            type: GraphQLString
-        },
         status: {
             type: GraphQLString
         }
@@ -257,8 +310,17 @@ const RolePermissionType = new GraphQLObjectType({
         role_id: {
             type: GraphQLID
         },
+        action: {
+            type: GraphQLString,
+        },
         permission_id: {
             type: GraphQLID
+        },
+        permission:{
+            type: PermissionType,
+            resolve(parent,args){
+                return Models.Permission.findById(parent.permission_id);
+            }
         }
     })
 })
@@ -329,7 +391,11 @@ const EmployeeType = new GraphQLObjectType({
         sred_salary:{type: GraphQLFloat},
         total_salary:{type: GraphQLFloat},
         year:{type: GraphQLInt},
-        company_id:{type: GraphQLString},
+        company_id:{type: GraphQLID},
+        user_id:{type: GraphQLID},
+        user:{type: UserType, resolve(parent, args){
+            return Models.User.findById(parent.user_id);
+        }},
         remark: {type: GraphQLString},
         status: {type: GraphQLString},
     })

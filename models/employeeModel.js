@@ -43,6 +43,10 @@ var EmployeeSchema = new Schema({
     company_id:{
         type: String,
         required: true
+    }, 
+    user_id:{
+        type: String,
+        required: false
     },
     remark: {
         type: String

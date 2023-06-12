@@ -12,6 +12,10 @@ var GrantQuestionSchema = new Schema({
         type: String,
         required: false
     },
+    first_question: {
+       type: Boolean,
+       required: true,
+    }
 
 });
 

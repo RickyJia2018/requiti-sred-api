@@ -8,9 +8,9 @@ const addGrantOption = {
     args: {
         name: { type: GraphQLString },
         description: { type: GraphQLString },
-       questionId: {type: GraphQLID},
-       grants: {type: new GraphQLList(GraphQLID)}
-
+        questionId: {type: GraphQLID},
+        next_question_id: {type: GraphQLID},
+        grants: {type: new GraphQLList(GraphQLID)}
     },
     async resolve(parent, args,{verifiedUser}){     
         if(!verifiedUser) throw new Error("Unauthorized")
@@ -27,6 +27,7 @@ const updateGrantOption = {
         name: { type: GraphQLString },
         description: { type: GraphQLString },
         questionId: {type: GraphQLID},
+        next_question_id: {type: GraphQLID},
         grants: {type: new GraphQLList(GraphQLID)}
 
 

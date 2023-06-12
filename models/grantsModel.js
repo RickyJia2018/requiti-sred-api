@@ -19,8 +19,6 @@ var GrantsSchema = new Schema({
     tag: {
         type: String,
         required: false,
-        enum : ['sred'],
-        default: "sred"
     },
 
 });

@@ -8,7 +8,9 @@ const addGrantQuestion = {
     args: {
         name: { type: GraphQLString },
         description: { type: GraphQLString },
-       
+        first_question: {
+            type: GraphQLBoolean
+        },
     },
     async resolve(parent, args,{verifiedUser}){     
         if(!verifiedUser) throw new Error("Unauthorized")
@@ -23,6 +25,9 @@ const updateGrantQuestion = {
     args: {
         id: { type: GraphQLID },
         name: { type: GraphQLString },
+        first_question: {
+            type: GraphQLBoolean
+        },
         description: { type: GraphQLString },
     },
     async resolve(parent, args,{verifiedUser}){     

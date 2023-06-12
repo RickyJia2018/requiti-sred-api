@@ -33,6 +33,10 @@ var CompanySchema = new Schema({
     manager:{
         type: String
     },
+    permissions:{
+        type: [String],
+        default: []
+    },
     status: {
         type: String,
         enum : ['inactive', 'active', 'blocked'],

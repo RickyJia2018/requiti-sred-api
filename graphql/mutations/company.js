@@ -1,7 +1,7 @@
 const { CompanyType } = require("../types");
 // const  User = require("../../models/userModel");
 const Company = require('../../services/company')
-const { GraphQLString, GraphQLID, GraphQLBoolean } = require("graphql");
+const { GraphQLString, GraphQLID, GraphQLBoolean, GraphQLList } = require("graphql");
 
 const addCompany = {
     type: CompanyType,
@@ -37,6 +37,7 @@ const updateCompany = {
         address: { type: GraphQLString },
         postCode: { type: GraphQLString },
         manager:{ type: GraphQLID },
+        permissions:{ type: new GraphQLList(GraphQLString) },
 
     },
     async resolve(parent, args,{verifiedUser}){   
