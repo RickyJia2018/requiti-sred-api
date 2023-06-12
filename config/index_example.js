@@ -2,7 +2,7 @@
 exports.connect_string ='1'; //dev
 
 exports.mongo_url_docker = `mongodb://mongo:27017/docker-node-mongo`
-exports.mongo_url_dev = `mongodb+srv://root:gucheng123@cluster0.wcgvt.mongodb.net/requitiDB?retryWrites=true&w=majority`
+exports.mongo_url_dev = `mongodb+srv://root:fake@cluster0.wcgvt.mongodb.net/requitiDB?retryWrites=true&w=majority`
 
 exports.connect_options  = {
     useNewUrlParser: true,
